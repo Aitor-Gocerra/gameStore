@@ -7,4 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideojuegoListComponent import OnInit{
   videojuegos: any[] = any;
+
+  constructor(private sVideojuego: VideojuegoService){}
 }
