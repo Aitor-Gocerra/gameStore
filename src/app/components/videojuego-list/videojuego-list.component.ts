@@ -9,6 +9,8 @@ import { VideojuegoService } from 'src/app/services/videojuego.service';
 export class VideojuegoListComponent{
   videojuegos: any[] = [];
   mejorValorados: any[] = [];
+  busquedaTitulo: any[] = [];
+  ordenPrecio: any[] = [];
 
   id : number | null = null;
   titulo: string = '';
@@ -19,15 +21,13 @@ export class VideojuegoListComponent{
   genero: string = '';
   puntuacion: number = 0;
 
-  masCaro: string = '';
-  masPuntuado: string = '';
-  mediaPrecio: number = 0;
+  haBuscado: boolean = false;
+  textoBusqueda: string = '';
 
   constructor(private sVideojuego: VideojuegoService) {}
 
   ngOnInit() {
     this.videojuegos = this.sVideojuego.getVideojuegos();
-    this.estadisticas();
   }
 
   prepararEdicion(game: any) {
@@ -52,6 +52,12 @@ export class VideojuegoListComponent{
     this.puntuacion = 0;
   }
 
+  ordenarArrayPrecio(){
+    /* const videogames = [...this.sVideojuego.getVideojuegos()]; Esto crea una copia */
+    const videogames = this.sVideojuego.getVideojuegos().slice(); /* Esto tambien crea una copia del original para no ordenar el array madre */
+    this.ordenPrecio = videogames.sort((a,b) => a.precio - b.precio);
+  }
+
   guardar() {
     if(this.id !== null) {
       this.sVideojuego.updateVideojuego(this.id, this.precio, this.puntuacion);
@@ -60,14 +66,12 @@ export class VideojuegoListComponent{
     }
 
     this.ngOnInit();
-    this.estadisticas();
     this.limpiarFormulario();
   }
 
   eliminar(id: number){
     this.sVideojuego.deleteVideojuego(id);
-    this.ngOnInit;
-    this.estadisticas();
+    this.ngOnInit();
   }
 
   mejorGames(){
@@ -75,32 +79,11 @@ export class VideojuegoListComponent{
     this.mejorValorados = videojuegos.filter(videojuego => videojuego.puntuacion > 8);
   }
 
-  estadisticas() {
-    let gameMasCaro = this.videojuegos[0];
+  busquedaPorTitulo(titulo: string) { 
 
-    for(let game of this.videojuegos){
-      if(game.precio > gameMasCaro.precio){
-        gameMasCaro = game;
-      }
-    }
-    this.masCaro = gameMasCaro.titulo;
+    this.haBuscado = true;
 
-    let gamePuntuado = this.videojuegos[0];
-
-    for(let game of this.videojuegos){
-      if(game.puntuacion > gamePuntuado.puntuacion){
-        gamePuntuado = game;
-      }
-    }
-    this.masPuntuado = gamePuntuado.titulo;
-
-    let suma = 0;
-    let contador = 0;
-    for(let game of this.videojuegos){
-      suma += game.precio;
-      contador ++;
-    }
-
-    this.mediaPrecio = suma/contador;
+    const gamesT = this.sVideojuego.getVideojuegos();
+    this.busquedaTitulo = gamesT.filter(juego => juego.titulo === titulo);
   }
 }

@@ -3,10 +3,22 @@
     <li *ngFor='let videojuego of videojuegos'>
         <span appDVideojuego>{{videojuego.titulo}}</span> -
         {{videojuego.desarrolladora | pVideojuego}} - 
-        {{videojuego.precio}} € - 
+        {{videojuego.precio | currency:'EUR':'code'}} € -  <!-- PIPE PREDEFINIDA EN EL SISTEMA DE ANGULAR -->
         {{videojuego.anoLanzamiento}} - 
         {{videojuego.genero}} - 
         {{videojuego.puntuacion}}
+    </li>
+</ul>
+<h2>ORDENAR POR PRECIO</h2>
+<button (click)="ordenarArrayPrecio()">ORDENAR</button>
+<ul>
+    <li *ngFor="let mejor of ordenPrecio">
+        <span appDVideojuego>{{mejor.titulo}}</span> -
+        {{mejor.desarrolladora | pVideojuego}} - 
+        {{mejor.precio}} € - 
+        {{mejor.anoLanzamiento | date:'yyyy'}} - 
+        {{mejor.genero}} - 
+        {{mejor.puntuacion}}
     </li>
 </ul>
 <h2>CRUD VIDEOJUEGO</h2>
@@ -55,9 +67,22 @@
         {{mejor.puntuacion}}
     </li>
 </ul>
-<div>
-    <h3>Estadísticas:</h3>
-    <p>El videojuego más caro es <strong>{{ masCaro }}</strong>.</p>
-    <p>El videojuego mejor puntuado es <strong>{{ masPuntuado}}</strong>.</p>
-    <p>La media de precio es <strong>{{mediaPrecio}}</strong> euros</p>
+
+
+<h2>BUSQUEDA</h2>
+<label for="busqueda">Buscar por titulo: </label> &nbsp;
+<input type="text" [(ngModel)]="textoBusqueda"><br>
+<button (click) = "busquedaPorTitulo(textoBusqueda)">Buscar</button>
+<ul>
+    <li *ngFor = "let juego of busquedaTitulo">
+        <span appDVideojuego>{{juego.titulo}}</span> -
+        {{juego.desarrolladora | pVideojuego}} - 
+        {{juego.precio}} € - 
+        {{juego.anoLanzamiento}} - 
+        {{juego.genero}} - 
+        {{juego.puntuacion}}
+    </li>
+</ul>
+<div *ngIf="haBuscado && busquedaTitulo.length === 0">
+    No se ha encontrado ningún videojuego con ese nombre.
 </div>

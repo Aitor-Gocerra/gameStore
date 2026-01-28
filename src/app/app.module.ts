@@ -7,13 +7,15 @@ import { VideojuegoListComponent } from './components/videojuego-list/videojuego
 import { FormsModule } from '@angular/forms';
 import { DVideojuegoDirective } from './directives/d-videojuego.directive';
 import { PVideojuegoPipe } from './pipes/p-videojuego.pipe';
+import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VideojuegoListComponent,
     DVideojuegoDirective,
-    PVideojuegoPipe
+    PVideojuegoPipe,
+    EstadisticasComponent
   ],
   imports: [
     BrowserModule,
