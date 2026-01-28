@@ -84,6 +84,8 @@ export class VideojuegoListComponent{
     this.haBuscado = true;
 
     const gamesT = this.sVideojuego.getVideojuegos();
-    this.busquedaTitulo = gamesT.filter(juego => juego.titulo === titulo);
+    this.busquedaTitulo = gamesT.filter(juego => 
+        juego.titulo.toLowerCase().includes(titulo.toLowerCase())
+    );
   }
 }

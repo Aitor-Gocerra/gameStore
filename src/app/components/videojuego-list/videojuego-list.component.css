@@ -1,0 +1,131 @@
+/* --- Contenedor Principal (Host) --- */
+:host {
+  display: block;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f4f7f9;
+  color: #333;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto; /* Centrar en pantalla */
+}
+
+/* --- Títulos --- */
+h2 {
+  color: #2c3e50;
+  border-bottom: 3px solid #3498db; /* Línea azul debajo del título */
+  padding-bottom: 10px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+h2:first-of-type {
+  margin-top: 0;
+}
+
+/* --- Listas (Grid de Tarjetas) --- */
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  /* Crea columnas automáticas responsive */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+li {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 5px solid #3498db; /* Borde decorativo a la izquierda */
+  line-height: 1.6;
+}
+
+li:hover {
+  transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Separador dentro de las tarjetas (para la sección CRUD) */
+li hr {
+  border: 0;
+  height: 1px;
+  background: #eee;
+  margin: 15px 0;
+}
+
+/* --- Formularios y Inputs --- */
+label {
+  display: inline-block;
+  font-weight: 600;
+  color: #555;
+  margin-top: 10px;
+  min-width: 150px; /* Alineación básica */
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Ocupar ancho disponible */
+  max-width: 400px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+input:disabled {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+/* --- Botones --- */
+button {
+  background-color: #3498db; /* Azul estándar */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Estilo específico para "Eliminar" detectando el texto no es posible con CSS puro fácilmente sin clases, 
+   pero podemos diferenciar el botón "Cancelar" si está deshabilitado o añadir lógica de colores básica. 
+   Por ahora, usaremos variaciones al pasar el mouse. */
+
+/* Mensajes de feedback */
+div[class*="ng-star-inserted"] { 
+    /* Estilo para el mensaje de "No encontrado" */
+    color: #e74c3c;
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* --- Span con directiva appDVideojuego (Título del juego) --- */
+span[appDVideojuego] {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    display: block; /* Que el título ocupe su propia línea dentro de la tarjeta */
+    margin-bottom: 5px;
+}

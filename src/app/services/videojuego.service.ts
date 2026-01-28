@@ -46,6 +46,6 @@ export class VideojuegoService {
   }
 
   deleteVideojuego(id: number) {
-    this.listaVideojuegos = this.listaVideojuegos.filter(juego => juego.id === id);
+    this.listaVideojuegos = this.listaVideojuegos.filter(juego => juego.id !== id);
   }
 }
