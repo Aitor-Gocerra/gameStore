@@ -1,1 +1,63 @@
-<p>videojuego-list works!</p>
+<h2>LISTA DE VIDEOJUEGOS</h2>
+<ul>
+    <li *ngFor='let videojuego of videojuegos'>
+        <span appDVideojuego>{{videojuego.titulo}}</span> -
+        {{videojuego.desarrolladora | pVideojuego}} - 
+        {{videojuego.precio}} € - 
+        {{videojuego.anoLanzamiento}} - 
+        {{videojuego.genero}} - 
+        {{videojuego.puntuacion}}
+    </li>
+</ul>
+<h2>CRUD VIDEOJUEGO</h2>
+<label for="titulo">Titulo:</label> &nbsp;
+<input type="text" [(ngModel)]="titulo" [disabled]="id !== null">
+<br>
+<label for="desarrolladora">Desarrolladora:</label> &nbsp;
+<input type="text" [(ngModel)]="desarrolladora" [disabled]="id !== null">
+<br>
+<label for="precio">Precio:</label> &nbsp;
+<input type="number" [(ngModel)]="precio">
+<br>
+<label for="anio">Año de lanzamiento:</label> &nbsp;
+<input type="number" [(ngModel)]="anoLanzamiento" [disabled]="id !== null">
+<br>
+<label for="genero">Genero:</label> &nbsp;
+<input type="text" [(ngModel)]="genero" [disabled]="id !== null">
+<br>
+<label for="puntuacion">Puntuacion</label>
+<input type="number" [(ngModel)]="puntuacion">
+<br>
+<button (click)="guardar()">
+    {{id !== null ? 'Guardar Cambios' : 'Agregar Videojuego'}}
+</button>
+<button *ngIf="id !== null" (click)="limpiarFormulario()">Cancelar</button>
+<h2>LISTA DE VIDEOJUEGOS</h2>
+<ul>
+    <li *ngFor='let videojuego of videojuegos'>
+        {{videojuego.titulo}} -
+        {{videojuego.precio}} € - 
+        {{videojuego.puntuacion}}
+        &nbsp;
+        <button (click)="eliminar(videojuego.id)">Eliminar</button> &nbsp;
+        <button (click)="prepararEdicion(videojuego)">Actualizar</button> <hr>
+    </li>
+</ul>
+<h2>MEJOR VALORADOS</h2>
+<button (click)="mejorGames()">Mejor valorados</button>
+<ul>
+    <li *ngFor="let mejor of mejorValorados">
+        <span appDVideojuego>{{mejor.titulo}}</span> -
+        {{mejor.desarrolladora | pVideojuego}} - 
+        {{mejor.precio}} € - 
+        {{mejor.anoLanzamiento}} - 
+        {{mejor.genero}} - 
+        {{mejor.puntuacion}}
+    </li>
+</ul>
+<div>
+    <h3>Estadísticas:</h3>
+    <p>El videojuego más caro es <strong>{{ masCaro }}</strong>.</p>
+    <p>El videojuego mejor puntuado es <strong>{{ masPuntuado}}</strong>.</p>
+    <p>La media de precio es <strong>{{mediaPrecio}}</strong> euros</p>
+</div>
